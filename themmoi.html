@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm mới danh mục</title>
+    <link rel="stylesheet" href="../css/themmoi.css">
+</head>
+<body>
+    <div class="modal">
+        <div class="modal-content">
+            <h2>Thêm mới danh mục</h2>
+            <form>
+                <label for="maDanhMuc">Mã danh mục <span class="required">*</span></label>
+                <input type="text" id="maDanhMuc" name="maDanhMuc" required>
+
+                <label for="tenDanhMuc">Tên danh mục <span class="required">*</span></label>
+                <input type="text" id="tenDanhMuc" name="tenDanhMuc" required>
+
+                <div class="status">
+                    <label>Trạng thái</label>
+                    <label class="radio">
+                        <input type="radio" name="trangThai" value="active" checked>
+                        Đang hoạt động
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="trangThai" value="inactive">
+                        Ngừng hoạt động
+                    </label>
+                </div>
+                <div class="buttons">
+                    <button type="button" class="cancel">Hủy</button>
+                    <button type="submit" class="submit">Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

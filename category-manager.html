@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lí danh sách</title>
+    <link rel="stylesheet" href="../css/category-manager.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+    <style>
+.form-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    width: 40%;
+    border-radius: 10px;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+.delete-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      z-index: 2000;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .delete-modal button {
+      margin-left: 10px;
+      padding: 5px 10px;
+    }
+
+    /* ✅ Added: Toast */
+    .toast {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      z-index: 3000;
+    }
+    </style>
+    <body>
+        <div class="overlay"></div> 
+        <div class="container">
+            <div class="container">
+                <aside class="sidebar">
+                    <h2>🔥 Ecommerce</h2>
+                    <ul>
+                        <li><i class="fas fa-chart-line"></i> Thống kê</li>
+                        <li onclick="window.location.href='dashboard.html'">
+                            <i class="fas fa-list"></i> Danh mục
+                        </li>
+                        <li onclick="window.location.href='category-manager.html'" class="active">
+                            <i class="fas fa-box"></i> Sản phẩm
+                        </li>
+                    </ul>
+                    
+                </aside>
+                <div class="container">
+                    <nav class="navbar">
+                      <div class="nav-right">
+                          <i class="fa-solid fa-bell"></i>
+                          <img src="../img/avt.png" alt="User Avatar" class="avatar">
+                      </div>
+                  </nav>
+                <main class="content">
+                    <h1>Sản phẩm</h1>
+                    <button class="btn blue">Thêm mới sản phẩm</button>
+                    <div class="actions">
+                            <select>
+                                <option>Lọc theo danh mục <i class="fa-solid fa-arrow-down"></i></option>
+                            </select>
+                            <select>
+                                <option>Lọc theo trạng thái <i class="fa-solid fa-arrow-down"></i></option>
+                            </select>
+                            <input type="text" placeholder="Tìm kiếm sản phẩm theo tên">
+                    </div>
+        
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã sản phẩn</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Giảm giá</th>
+                                <th>Trạng thái</th>
+                                <th>Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>SP001</td>
+                                <td>Iphone 12 Pro</td>
+                                <td>12.000.000 đ</td>
+                                <td>10</td>
+                                <td>0%</td>
+                                <td class="active">●Đang hoạt động</td>
+                                <td>
+                                    <i class="fas fa-trash delete"></i>
+                                    <i class="fas fa-edit edit"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>SP002</td>
+                                <td>Samsung Galaxy X20</td>
+                                <td>21.000.000 đ</td>
+                                <td>100</td>
+                                <td>5%</td>
+                                <td class="inactive">●Ngừng hoạt động</td>
+                                <td>
+                                    <i class="fas fa-trash delete"></i>
+                                    <i class="fas fa-edit edit"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>SP003</td>
+                                <td>Phone 8 Plus</td>
+                                <td>5.000.000 đ</td>
+                                <td>10</td>
+                                <td>0%</td>
+                                <td class="active">●Đang hoạt động</td>
+                                <td>
+                                    <i class="fas fa-trash delete"></i>
+                                    <i class="fas fa-edit edit"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>SP004</td>
+                                <td>IPhone 14 Pro max</td>
+                                <td>25.000.000 đ</td>
+                                <td>20</td>
+                                <td>2%</td>
+                                <td class="inactive">●Ngừng hoạt động</td>
+                                <td>
+                                    <i class="fas fa-trash delete"></i>
+                                    <i class="fas fa-edit edit"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>SP005</td>
+                                <td>Oppo X3</td>
+                                <td>2.000.000 đ</td>
+                                <td>10</td>
+                                <td>5%</td>
+                                <td class="inactive">●Ngừng hoạt động</td>
+                                <td>
+                                    <i class="fas fa-trash delete"></i>
+                                    <i class="fas fa-edit edit"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>SP006</td>
+                                <td>Iphone 16</td>
+                                <td>20.000.000 đ</td>
+                                <td>20</td>
+                                <td>3%</td>
+                                <td class="inactive">●Ngừng hoạt động</td>
+                                <td>
+                                    <i class="fas fa-trash delete"></i>
+                                    <i class="fas fa-edit edit"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>SP007</td>
+                                <td>Phone 7 Plus</td>
+                                <td>4.000.000 đ</td>
+                                <td>10</td>
+                                <td>4%</td>
+                                <td class="active">●Đang hoạt động</td>
+                                <td>
+                                    <i class="fas fa-trash delete"></i>
+                                    <i class="fas fa-edit edit"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>SP008</td>
+                                <td>Samsung  S20 Ultra</td>
+                                <td>30.000.000 đ</td>
+                                <td>15</td>
+                                <td>2%</td>
+                                <td class="inactive">●Ngừng hoạt động</td>
+                                <td>
+                                    <i class="fas fa-trash delete"></i>
+                                    <i class="fas fa-edit edit"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        <button>←</button>
+                        <button>1</button>
+                        <button>2</button>
+                        <button class="active">3</button>
+                        <button>4</button>
+                        <button>5</button>
+                        <button>6</button>
+                        <button>7</button>
+                        <button>...</button>
+                        <button>20</button>
+                        <button>→</button>
+                    </div>
+                </main>
+                <div class="form-container">
+                    <h1>Thêm mới sản phẩm</h1>
+                    <form>
+                        <div class="form-group">
+                            <label for="product-code">Mã sản phẩm *</label>
+                            <input type="text" id="product-code" name="product-code">
+                        </div>
+                        <div class="form-group">
+                            <label for="product-name">Tên sản phẩm *</label>
+                            <input type="text" id="product-name" name="product-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Danh mục *</label>
+                            <select id="category" name="category">
+                                <option value="dien-thoai">Điện thoại</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Trạng thái</label>
+                            <div class="status-options">
+                                <label><input type="radio" name="status" value="active" checked> Đang hoạt động</label>
+                                <label><input type="radio" name="status" value="inactive"> Ngừng hoạt động</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Số lượng</label>
+                            <input type="number" id="quantity" name="quantity" value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Giá</label>
+                            <input type="number" id="price" name="price" value="10000000">
+                        </div>
+                        <div class="form-group">
+                            <label for="discount">Giảm giá</label>
+                            <input type="number" id="discount" name="discount" value="10">
+                        </div>
+                        <div class="form-group">
+                            <label>Hình ảnh *</label>
+                            <div class="image-upload">
+                                <p>Vui lòng chọn hình ảnh có định dạng .png hoặc .jpg (kích thước nhỏ hơn hoặc bằng 5MB)</p>
+                                <input type="file" id="image" name="image" accept="image/png, image/jpeg">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Chi tiết sản phẩm</label>
+                            <textarea id="description" name="description"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="cancel-button">Hủy</button>
+                            <button type="submit" class="submit-button">Thêm</button>
+                        </div>
+                    </form>
+                    
+                </div>
+        </div>
+    </body>
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const addButton = document.querySelector(".btn.blue"); 
+    const formContainer = document.querySelector(".form-container"); 
+    const overlay = document.querySelector(".overlay"); 
+    const cancelButton = document.querySelector(".cancel-button"); 
+    addButton.addEventListener("click", function () {
+        formContainer.style.display = "block";
+        overlay.style.display = "block";
+    });
+    overlay.addEventListener("click", closeForm);
+    cancelButton.addEventListener("click", closeForm);
+
+    function closeForm() {
+        formContainer.style.display = "none";
+        overlay.style.display = "none";
+    }
+});
+        </script>
+    </div>
+</body>
+</html>
+</body>
+</html>

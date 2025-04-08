@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/new.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Thêm mới sản phẩm</h1>
+        <form>
+            <div class="form-group">
+                <label for="product-code">Mã sản phẩm *</label>
+                <input type="text" id="product-code" name="product-code">
+            </div>
+            <div class="form-group">
+                <label for="product-name">Tên sản phẩm *</label>
+                <input type="text" id="product-name" name="product-name">
+            </div>
+            <div class="form-group">
+                <label for="category">Danh mục *</label>
+                <select id="category" name="category">
+                    <option value="dien-thoai">Điện thoại</option>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label>Trạng thái</label>
+                <div class="status-options">
+                    <label><input type="radio" name="status" value="active" checked> Đang hoạt động</label>
+                    <label><input type="radio" name="status" value="inactive"> Ngừng hoạt động</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Số lượng</label>
+                <input type="number" id="quantity" name="quantity" value="1">
+            </div>
+            <div class="form-group">
+                <label for="price">Giá</label>
+                <input type="number" id="price" name="price" value="10000000">
+            </div>
+            <div class="form-group">
+                <label for="discount">Giảm giá</label>
+                <input type="number" id="discount" name="discount" value="10">
+            </div>
+            <div class="form-group">
+                <label>Hình ảnh *</label>
+                <div class="image-upload">
+                    <p>Vui lòng chọn hình ảnh có định dạng .png hoặc .jpg (kích thước nhỏ hơn hoặc bằng 5MB)</p>
+                    <input type="file" id="image" name="image" accept="image/png, image/jpeg">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description">Chi tiết sản phẩm</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="cancel-button">Hủy</button>
+                <button type="submit" class="submit-button">Lưu</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

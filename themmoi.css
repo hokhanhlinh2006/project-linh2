@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.modal {
+    background: white;
+    width: 652px;
+    height: 350px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+.required {
+    color: red;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.status {
+    margin-top: 15px;
+}
+
+.radio {
+    align-items: center;
+    margin: 5px 0;
+}
+
+.radio input {
+    margin-right: 5px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cancel {
+    background: #f0f0f0;
+    margin-right: 10px;
+}
+
+.submit {
+    background: blue;
+    color: white;
+}

@@ -1,0 +1,222 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #f5f5f5;
+}
+.fa-bell {
+    font-size: 30px;
+  }
+  .navbar{
+    position: absolute;
+    right: 40px;
+    top: 30px;
+  }
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 540%;
+  }
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #f8f9fa;
+    padding: 20px;
+  }
+.sidebar {
+    width: 220px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    height: 100vh;
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.sidebar ul li i {
+    margin-right: 10px;
+}
+
+.sidebar ul .active {
+    font-weight: bold;
+    color: #007bff;
+}
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background: white;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header .actions {
+    display: flex;
+    gap: 10px;
+}
+.header input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-btn {
+    background: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.add-btn:hover {
+    background: #0056b3;
+}
+table {
+    width: 1112px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #f9f9f9;
+}
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.status.active {
+    color: green;
+}
+
+.status.inactive {
+    color: red;
+}
+.edit, .delete {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.edit {
+    color: orange;
+}
+
+.delete {
+    color: red;
+}
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination button {
+    padding: 6px 12px;
+    margin: 3px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pagination .active {
+    background: #007bff;
+    color: white;
+}
+.modal {
+    background: white;
+    width: 652px;
+    height: 350px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+.required {
+    color: red;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.status {
+    margin-top: 15px;
+}
+
+.radio {
+    align-items: center;
+    margin: 5px 0;
+}
+
+.radio input {
+    margin-right: 5px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cancel {
+    background: #f0f0f0;
+    margin-right: 10px;
+}
+
+.submit {
+    background: blue;
+    color: white;
+}
