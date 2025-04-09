@@ -15,7 +15,6 @@
     max-width: 100%;
     overflow: hidden;
 }
-
 .carousel {
     display: flex;
     transition: transform 0.5s ease-in-out;
@@ -41,15 +40,12 @@ button {
     cursor: pointer;
     z-index: 10;
 }
-
 .prev {
     left: 10px;
 }
-
 .next {
     right: 10px;
 }
-
 .dots-container {
     position: absolute;
     bottom: 10px;
@@ -57,7 +53,6 @@ button {
     transform: translateX(-50%);
     display: flex;
 }
-
 .dot {
     width: 10px;
     height: 10px;
@@ -66,7 +61,6 @@ button {
     border-radius: 50%;
     cursor: pointer;
 }
-
 .dot.active {
     background-color: #717171;
 }
@@ -85,13 +79,13 @@ button {
             <i class="far fa-heart"></i>
             <i class="fas fa-shopping-cart"></i>
             <div class="user-menu" id="userIcon">
-                <i class="fa-regular fa-user"></i>
-                <div class="dropdown" id="dropdownMenu">
-                  <a href="register.html">Đăng ký</a>
-                  <a href="login.html">Đăng xuất</a>
-                </div>
+              <i class="fa-regular fa-user"></i>
+              <div class="dropdown" id="dropdownMenu">
+                <a href="register.html">Đăng ký</a>
+                <a href="#" id="logoutBtn">Đăng xuất</a> 
               </div>
-        </div>
+            </div>
+          </div>
     </div>
     <div class="menu">
         <a href="#"> 📱 Điện thoại</a> |
@@ -282,7 +276,6 @@ button {
     <script>
          const userIcon = document.getElementById('userIcon');
     const dropdown = document.getElementById('dropdownMenu');
-
     userIcon.addEventListener('click', function (e) {
       dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     });
@@ -342,8 +335,15 @@ button {
     });
     document.querySelector(".carousel-container").addEventListener("mouseenter", stopAutoSlide);
     document.querySelector(".carousel-container").addEventListener("mouseleave", startAutoSlide);
-
     startAutoSlide();
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logoutBtn");
+  logoutBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+  });
 });
     </script>
 </body>

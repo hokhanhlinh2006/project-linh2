@@ -44,13 +44,10 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
-
     .delete-modal button {
       margin-left: 10px;
       padding: 5px 10px;
     }
-
-    /* ✅ Added: Toast */
     .toast {
       display: none;
       position: fixed;
@@ -86,6 +83,10 @@
                       <div class="nav-right">
                           <i class="fa-solid fa-bell"></i>
                           <img src="../img/avt.png" alt="User Avatar" class="avatar">
+                          <div class="dropdown" id="dropdownMenu" style="display: none; position: absolute; right: 20px; top: 60px; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.2); border-radius: 6px; padding: 10px;">
+                            <a href="#" id="logoutBtn" style="text-decoration: none; color: black;">Đăng xuất</a>
+                        </div>
+                        
                       </div>
                   </nav>
                 <main class="content">
@@ -100,7 +101,6 @@
                             </select>
                             <input type="text" placeholder="Tìm kiếm sản phẩm theo tên">
                     </div>
-        
                     <table>
                         <thead>
                             <tr>
@@ -282,27 +282,144 @@
                 </div>
         </div>
     </body>
-        <script>
-        document.addEventListener("DOMContentLoaded", function () {
-    const addButton = document.querySelector(".btn.blue"); 
-    const formContainer = document.querySelector(".form-container"); 
-    const overlay = document.querySelector(".overlay"); 
-    const cancelButton = document.querySelector(".cancel-button"); 
-    addButton.addEventListener("click", function () {
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const addBtn = document.querySelector(".btn.blue");
+      const formContainer = document.querySelector(".form-container");
+      const overlay = document.querySelector(".overlay");
+      const cancelBtn = document.querySelector(".cancel-button");
+      const form = formContainer.querySelector("form");
+      const productTableBody = document.querySelector("tbody");
+      const searchInput = document.querySelector('input[placeholder*="Tìm kiếm"]');
+    
+      let products = JSON.parse(localStorage.getItem("products") || "[]");
+      let editingIndex = -1;
+    
+      function renderProducts(list = products) {
+        productTableBody.innerHTML = list.map((p, i) => `
+          <tr>
+            <td>${p.code}</td>
+            <td>${p.name}</td>
+            <td>${p.price.toLocaleString()} đ</td>
+            <td>${p.quantity}</td>
+            <td>${p.discount}%</td>
+            <td class="${p.status === 'active' ? 'active' : 'inactive'}">●${p.status === 'active' ? 'Đang hoạt động' : 'Ngừng hoạt động'}</td>
+            <td>
+              <i class="fas fa-trash delete" data-index="${i}"></i>
+              <i class="fas fa-edit edit" data-index="${i}"></i>
+            </td>
+          </tr>
+        `).join("");
+      }
+      function resetForm() {
+        form.reset();
+        editingIndex = -1;
+      }
+      function openForm() {
         formContainer.style.display = "block";
         overlay.style.display = "block";
-    });
-    overlay.addEventListener("click", closeForm);
-    cancelButton.addEventListener("click", closeForm);
-
-    function closeForm() {
+      }
+    
+      function closeForm() {
         formContainer.style.display = "none";
         overlay.style.display = "none";
+        resetForm();
+      }
+      addBtn.onclick = () => {
+        resetForm();
+        openForm();
+      };
+    
+      cancelBtn.onclick = closeForm;
+      overlay.onclick = closeForm;
+    
+      form.onsubmit = function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const newProduct = {
+          code: formData.get("product-code").trim(),
+          name: formData.get("product-name").trim(),
+          category: formData.get("category"),
+          status: formData.get("status"),
+          quantity: Number(formData.get("quantity")),
+          price: Number(formData.get("price")),
+          discount: Number(formData.get("discount")),
+          image: formData.get("image")?.name || "",
+          description: formData.get("description"),
+        };
+        if (!newProduct.code || !newProduct.name || newProduct.price <= 0 || newProduct.quantity < 0) {
+          alert("Vui lòng nhập đầy đủ và hợp lệ!");
+          return;
+        }
+        const duplicate = products.some((p, i) =>
+          (p.code === newProduct.code || p.name === newProduct.name) && i !== editingIndex
+        );
+        if (duplicate) {
+          alert("Mã hoặc tên sản phẩm đã tồn tại!");
+          return;
+        }
+        if (editingIndex === -1) {
+          products.push(newProduct);
+          alert("Đã thêm sản phẩm!");
+        } else {
+          products[editingIndex] = newProduct;
+          alert("Cập nhật sản phẩm thành công!");
+        }
+        localStorage.setItem("products", JSON.stringify(products));
+        renderProducts();
+        closeForm();
+      };
+      productTableBody.onclick = function (e) {
+        const index = e.target.dataset.index;
+        if (e.target.classList.contains("edit")) {
+          const p = products[index];
+          form["product-code"].value = p.code;
+          form["product-name"].value = p.name;
+          form["category"].value = p.category;
+          form["status"].value = p.status;
+          form["quantity"].value = p.quantity;
+          form["price"].value = p.price;
+          form["discount"].value = p.discount;
+          form["description"].value = p.description;
+          editingIndex = index;
+          openForm();
+        } else if (e.target.classList.contains("delete")) {
+          if (confirm("Bạn có chắc muốn xóa?")) {
+            products.splice(index, 1);
+            localStorage.setItem("products", JSON.stringify(products));
+            renderProducts();
+          }
+        }
+      };
+      searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase();
+        const filtered = products.filter(p =>
+          p.name.toLowerCase().includes(keyword)
+        );
+        renderProducts(filtered);
+      });
+      renderProducts();
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+  const avatar = document.querySelector(".avatar");
+  const dropdown = document.getElementById("dropdownMenu");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  avatar.addEventListener("click", () => {
+    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+  });
+  logoutBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.removeItem("user");
+    window.location.href = "project.html";
+  });
+  document.addEventListener("click", (e) => {
+    if (!avatar.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = "none";
     }
+  });
 });
-        </script>
-    </div>
-</body>
-</html>
+
+    </script>     
 </body>
 </html>
